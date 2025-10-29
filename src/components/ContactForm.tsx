@@ -92,7 +92,8 @@ const ContactForm = () => {
         </div>
 
         <div className="max-w-3xl mx-auto">
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <div className="bg-card rounded-2xl shadow-soft border border-border p-8 md:p-10">
+            <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <Label htmlFor="name">Full Name *</Label>
@@ -247,6 +248,7 @@ const ContactForm = () => {
               </Button>
             </div>
           </form>
+          </div>
         </div>
       </div>
     </section>
