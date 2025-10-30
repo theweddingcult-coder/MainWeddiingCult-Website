@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { Award, Camera, Heart } from "lucide-react";
-import photographerImage from "@/assets/photographer-portrait.jpg";
 
 const About = () => {
   const scrollToContact = () => {
@@ -21,7 +20,7 @@ const About = () => {
           <div className="relative">
             <div className="aspect-[3/4] rounded-2xl overflow-hidden shadow-elevated">
               <img
-                src={photographerImage}
+                
                 alt="Professional wedding photographer portrait"
                 className="w-full h-full object-cover"
               />
@@ -35,7 +34,7 @@ const About = () => {
           {/* Content */}
           <div>
             <h2 className="text-4xl md:text-5xl font-heading font-bold text-primary mb-6">
-              Meet Priya Sharma
+              Meet Gulshan Kumar
             </h2>
             <div className="w-24 h-1 bg-secondary mb-8" />
             

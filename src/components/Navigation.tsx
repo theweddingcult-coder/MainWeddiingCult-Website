@@ -54,9 +54,9 @@ const Navigation = () => {
             {/* Logo */}
             <button
               onClick={() => scrollToSection("hero")}
-              className="text-xl md:text-2xl font-heading font-bold text-primary hover:text-secondary transition-colors"
+              className="text-xxl md:text-2xl font-heading font-bold text-primary hover:text-secondary transition-colors "
             >
-              Aanya Studios
+             The Wedding Cult
             </button>
 
             {/* Desktop Navigation */}
@@ -79,20 +79,21 @@ const Navigation = () => {
               </Button>
             </div>
 
-            {/* Mobile Menu Toggle */}
-            <button
-              className="md:hidden text-foreground"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            >
-              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
+            
           </div>
         </div>
       </nav>
+      {/* Mobile Menu Toggle */}
+      <button
+        className="md:hidden text-foreground z-[999] fixed top-4 right-6"
+        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+      >
+        {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+      </button>
 
       {/* Mobile Menu Overlay */}
       {isMobileMenuOpen && (
-        <div className="fixed inset-0 z-40 bg-background md:hidden">
+        <div className="fixed inset-0 z-50 bg-background md:hidden">
           <div className="flex flex-col items-center justify-center h-full gap-8 px-4">
             {navLinks.map((link) => (
               <button

@@ -1,13 +1,9 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import haldiImage from "@/assets/portfolio-haldi.jpg";
-import mehndiImage from "@/assets/portfolio-mehndi.jpg";
-import preweddingImage from "@/assets/portfolio-prewedding.jpg";
-import babyshowerImage from "@/assets/portfolio-babyshower.jpg";
-import weddingImage from "@/assets/portfolio-wedding-1.jpg";
+import React from "react";
 
-type FilterType = "All" | "Wedding" | "Haldi" | "Mehndi" | "Pre-Wedding" | "Baby Shower";
+type FilterType = "All" | "Wedding" | "Haldi" | "Mehndi" | "Pre-Wedding" | "Baby shoot" | "Shagan";
 
 interface PortfolioItem {
   id: number;
@@ -17,22 +13,182 @@ interface PortfolioItem {
   category: FilterType;
 }
 
+// Update these image URLs as needed; external links will render directly
 const portfolioItems: PortfolioItem[] = [
-  { id: 1, image: weddingImage, title: "Grand Pheras", location: "Jaipur", category: "Wedding" },
-  { id: 2, image: haldiImage, title: "Haldi Joy", location: "Mumbai", category: "Haldi" },
-  { id: 3, image: mehndiImage, title: "Mehndi Moments", location: "Delhi", category: "Mehndi" },
-  { id: 4, image: preweddingImage, title: "Pre-Wedding by the Sea", location: "Goa", category: "Pre-Wedding" },
-  { id: 5, image: babyshowerImage, title: "Baby Shower Bliss", location: "Bengaluru", category: "Baby Shower" },
-];
+  {
+    id: 1,
+    image:
+      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Wedding/39.jpg",
+    title: "Bride entry",
+    location: "Jaipur",
+    category: "Wedding",
+  },
+  {
+    id: 2,
+    image:
+      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Wedding/bbb%20(473).JPG",
+    title: "Varmala Ceremony",
+    location: "Mumbai",
+    category: "Wedding",
+  },
+  {
+    id: 3,
+    image:
+      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Wedding/SPV60738.JPG",
+    title: "Bride and Groom",
+    location: "Delhi",
+    category: "Wedding",
+  },
+  {
+    id: 4,
+    image:
+      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Baby%20Shoot/SPV%20(124).JPG",
+    title: "First Birthday",
+    location: "Delhi",
+    category: "Baby shoot",
+  },
+  {
+    id: 5,
+    image:
+      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Haldi/abc%20(1754).JPG",
+    title: "Haldi Ceremony",
+    location: "Bengaluru",
+    category: "Haldi",
+  },
+  {
+    id: 6,
+    image:
+      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Parth%20and%20Khushi/011A5174.JPG",
+    title: "Pre-Wedding Shoot",
+    location: "Delhi",
+    category: "Pre-Wedding",
+  },
+  {
+    id: 7,
+    image:
+      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Mehendi/SPV65729.JPG",
+    title: "Mehndi Ceremony",
+    location: "Delhi",
+    category: "Mehndi",
+  },
+  {
+    id: 8,
+    image:
+      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Haldi/35.jpg",
+    title: "Haldi moments",
+    location: "Delhi",
+    category: "Haldi",
+  },
+  {
+    id: 9,
+    image:
+      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Baby%20Shoot/SPV%20(662).JPG",
+    title: "Pretty little baby",
+    location: "Delhi",
+    category: "Baby shoot",
+  },
+  {
+    id: 10,
+    image:
+      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Wedding/SPV60832.JPG",
+    title: "Bride Entry",
+    location: "Mumbai",
+    category: "Wedding",
+  },
+  {
+    id: 11,
+    image:
+      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Mehendi/abc%20(60).JPG",
+    title: "Pre-Wedding Shoot",
+    location: "Delhi",
+    category: "Pre-Wedding",
+  },
+  {
+    id: 12,
+    image:
+      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Mehendi/SPV65583.JPG",
+    title: "Mehndi Ceremony",
+    location: "Dwarka",
+    category: "Mehndi",
+  },
+  {
+    id: 13,
+    image:
+      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Shagan/10%20-%20Copy%20(2).jpg",
+    title: "Mehndi Ceremony",
+    location: "Delhi",
+    category: "Shagan",
+  },
+  {
+    id: 14,
+    image:
+      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Shagan/18%20-%20Copy%20(2).jpg",
+    title: "Wedding Shoot",
+    location: "Dwarka",
+    category: "Wedding",
+  },
+  {
+    id: 15,
+    image:
+      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/PreWedding/_11A3289.JPG",
+    title: "Pre-Wedding Shoot",
+    location: "Delhi",
+    category: "Pre-Wedding",
+  },
+  {
+    id: 16,
+    image:
+      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Baby%20Shoot/SPV%20(513).JPG",
+    title: "Baby shoot",
+    location: "Delhi",
+    category: "Baby shoot",
+  },
+  {
+    id: 17,
+    image:
+      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Baby%20Shoot/SPV%20(87).JPG",
+    title: "Family Photoshoot",
+    location: "Delhi",
+    category: "Baby shoot",
+  },
+  {
+    id: 18,
+    image:
+      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Parth%20and%20Khushi/SPV61179%20copy.jpg",
+    title: "Romantic Couple",
+    location: "Delhi",
+    category: "Pre-Wedding",
+  },
+]
+
+const IMAGES_PER_PAGE = 9;
 
 const Portfolio = () => {
   const [activeFilter, setActiveFilter] = useState<FilterType>("All");
+  const [visibleBatches, setVisibleBatches] = useState(1);
 
-  const filters: FilterType[] = ["All", "Wedding", "Haldi", "Mehndi", "Pre-Wedding", "Baby Shower"];
+  const filters: FilterType[] = [
+    "All",
+    "Wedding",
+    "Haldi",
+    "Mehndi",
+    "Pre-Wedding",
+    "Baby shoot",
+    "Shagan",
+  ];
 
-  const filteredItems = activeFilter === "All" 
-    ? portfolioItems 
-    : portfolioItems.filter(item => item.category === activeFilter);
+  const filteredItems =
+    activeFilter === "All"
+      ? portfolioItems
+      : portfolioItems.filter((item) => item.category === activeFilter);
+  
+  // Reset batching when filter changes
+  React.useEffect(() => {
+    setVisibleBatches(1);
+  }, [activeFilter]);
+
+  const imagesToShow = filteredItems.slice(0, visibleBatches * IMAGES_PER_PAGE);
+  const hasMore = imagesToShow.length < filteredItems.length;
 
   const scrollToContact = () => {
     const element = document.getElementById("contact");
@@ -76,8 +232,8 @@ const Portfolio = () => {
         </div>
 
         {/* Gallery Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-          {filteredItems.map((item) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+          {imagesToShow.map((item) => (
             <div
               key={item.id}
               className="group relative overflow-hidden rounded-xl shadow-soft hover:shadow-elevated transition-all duration-300 hover-lift cursor-pointer aspect-[4/5]"
@@ -102,7 +258,18 @@ const Portfolio = () => {
             </div>
           ))}
         </div>
-
+        {/* View More Button */}
+        {hasMore && (
+          <div className="flex justify-center mb-12">
+            <Button
+              variant="outline"
+              className="px-8 py-2 rounded-full border-secondary text-secondary hover:bg-secondary/20 transition-all"
+              onClick={() => setVisibleBatches((v) => v + 1)}
+            >
+              View More
+            </Button>
+          </div>
+        )}
         {/* CTA */}
         <div className="text-center">
           <p className="text-muted-foreground mb-6 text-lg">

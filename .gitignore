@@ -11,6 +11,8 @@ node_modules
 dist
 dist-ssr
 *.local
+.qodo
+
 
 # Editor directories and files
 .vscode/*
@@ -22,3 +24,11 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Vercel
+.vercel
+
+# Environment files
+.env
+.env.*
+!.env.example
