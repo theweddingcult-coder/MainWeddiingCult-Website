@@ -1,4 +1,5 @@
 import { useState } from "react";
+import emailjs from "@emailjs/browser";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -44,14 +45,42 @@ const ContactForm = () => {
 
     setIsSubmitting(true);
 
-    // Simulate form submission
-    setTimeout(() => {
+    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID as string;
+    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID as string;
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY as string;
+
+    if (!serviceId || !templateId || !publicKey) {
       toast({
-        title: "Enquiry Received!",
-        description: "We'll get back to you within 24 hours. Check your email for confirmation.",
+        title: "Email service not configured",
+        description: "Missing EmailJS credentials. Please add VITE_EMAILJS_* env vars.",
+        variant: "destructive",
       });
-      
-      // Reset form
+      setIsSubmitting(false);
+      return;
+    }
+
+    try {
+      emailjs.init(publicKey);
+
+      const templateParams = {
+        to_email: formData.email,
+        to_name: formData.name || "There",
+        phone: formData.phone,
+        event_type: formData.eventType,
+        event_date: formData.eventDate,
+        city: formData.city,
+        services: formData.services.join(", "),
+        budget: formData.budget,
+        message: formData.message,
+      } as Record<string, string>;
+
+      await emailjs.send(serviceId, templateId, templateParams);
+
+      toast({
+        title: "Enquiry Sent!",
+        description: "We've emailed a copy to the address you provided.",
+      });
+
       setFormData({
         name: "",
         phone: "",
@@ -64,9 +93,15 @@ const ContactForm = () => {
         message: "",
         consent: false,
       });
-      
+    } catch (err) {
+      toast({
+        title: "Failed to send",
+        description: "Please try again or use WhatsApp instead.",
+        variant: "destructive",
+      });
+    } finally {
       setIsSubmitting(false);
-    }, 1500);
+    }
   };
 
   const handleServiceToggle = (service: string) => {
