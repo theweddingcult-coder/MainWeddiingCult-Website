@@ -45,11 +45,12 @@ const ContactForm = () => {
 
     setIsSubmitting(true);
 
-    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID as string;
-    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID as string;
+    const serviceId = (import.meta.env.VITE_EMAILJS_SERVICE_ID as string) || "service_a11jexo";
+    const userTemplateId = (import.meta.env.VITE_EMAILJS_TEMPLATE_ID as string) || (import.meta.env.VITE_EMAILJS_TEMPLATE_ID_USER as string);
+    const adminTemplateId = (import.meta.env.VITE_EMAILJS_TEMPLATE_ID_ADMIN as string) || undefined;
     const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY as string;
 
-    if (!serviceId || !templateId || !publicKey) {
+    if (!userTemplateId || !publicKey) {
       toast({
         title: "Email service not configured",
         description: "Missing EmailJS credentials. Please add VITE_EMAILJS_* env vars.",
@@ -62,19 +63,46 @@ const ContactForm = () => {
     try {
       emailjs.init(publicKey);
 
-      const templateParams = {
-        to_email: formData.email,
-        to_name: formData.name || "There",
+      const commonParams = {
+        name: formData.name,
         phone: formData.phone,
+        email: formData.email,
         event_type: formData.eventType,
         event_date: formData.eventDate,
         city: formData.city,
         services: formData.services.join(", "),
         budget: formData.budget,
         message: formData.message,
+        submitted_at: new Date().toLocaleString(),
       } as Record<string, string>;
 
-      await emailjs.send(serviceId, templateId, templateParams);
+      // Auto-reply to the user
+      const userParams = {
+        ...commonParams,
+        to_email: formData.email,
+        to_name: formData.name || "There",
+        reply_to: "theweddingcult@gmail.com",
+        brand_name: "the wedding cult",
+        whatsapp: "+91 98110 98155",
+        address: "House no. 2015, Block B1, Sector 57, Gurugram, Haryana 122003",
+        hours: "10 am–8 pm daily",
+        instagram: "https://www.instagram.com/the_wedding_cult",
+        youtube: "https://www.youtube.com/@theweddingcult9471",
+        facebook: "https://www.facebook.com/share/1BmxtQx2PY/",
+      } as Record<string, string>;
+
+      // Admin notification (optional if admin template provided)
+      const adminParams = {
+        ...commonParams,
+        to_name: "the wedding cult",
+        reply_to: formData.email,
+      } as Record<string, string>;
+
+      if (adminTemplateId) {
+        await emailjs.send(serviceId, adminTemplateId, adminParams);
+      }
+
+      await emailjs.send(serviceId, userTemplateId, userParams);
 
       toast({
         title: "Enquiry Sent!",
@@ -93,10 +121,11 @@ const ContactForm = () => {
         message: "",
         consent: false,
       });
-    } catch (err) {
+    } catch (err: any) {
+      const details = err?.text || err?.message || "";
       toast({
         title: "Failed to send",
-        description: "Please try again or use WhatsApp instead.",
+        description: details ? `EmailJS error: ${details}` : "Please try again or use WhatsApp instead.",
         variant: "destructive",
       });
     } finally {
@@ -276,7 +305,7 @@ const ContactForm = () => {
                 type="button"
                 variant="outline"
                 className="flex-1 border-secondary text-foreground hover:bg-secondary hover:text-foreground rounded-full py-6 text-lg font-medium hover-lift"
-                onClick={() => window.open("https://wa.me/919876543210?text=Hi, I'm interested in your photography services", "_blank")}
+                onClick={() => window.open("https://wa.me/919811098155?text=Hi,%20I'm%20interested%20in%20your%20photography%20services", "_blank")}
               >
                 <MessageCircle className="w-5 h-5 mr-2" />
                 Chat on WhatsApp

@@ -18,14 +18,14 @@ const StudioMap = () => {
           {/* Map */}
           <div className="relative rounded-2xl overflow-hidden shadow-elevated h-[400px] lg:h-[500px]">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3771.8932698547944!2d72.8310494!3d19.0232211!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7cec95d994a9f%3A0x8a4e6a3e8b8c8e8e!2sBandra%2C%20Mumbai%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1234567890"
+              src="https://www.google.com/maps?q=House%20no.%202015%2C%20Block%20B1%2C%20Sector%2057%2C%20Gurugram%2C%20Haryana%20122003&output=embed"
               width="100%"
               height="100%"
               style={{ border: 0 }}
               allowFullScreen
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              title="Aanya Studios Location"
+              title="the wedding cult Location"
             />
           </div>
 
@@ -33,7 +33,7 @@ const StudioMap = () => {
           <div className="flex flex-col justify-center">
             <div className="bg-card p-8 rounded-2xl shadow-soft border border-border">
               <h3 className="text-2xl font-heading font-bold text-primary mb-6">
-                Aanya Studios
+                the wedding cult
               </h3>
 
               <div className="space-y-6">
@@ -42,9 +42,7 @@ const StudioMap = () => {
                   <div>
                     <p className="font-semibold text-foreground mb-1">Address</p>
                     <p className="text-muted-foreground">
-                      3rd Floor, Sunshine Plaza<br />
-                      Linking Road, Bandra West<br />
-                      Mumbai, Maharashtra 400050
+                      House no. 2015, Block B1, Sector 57, Gurugram, Haryana 122003
                     </p>
                   </div>
                 </div>
@@ -53,10 +51,7 @@ const StudioMap = () => {
                   <Clock className="w-6 h-6 text-secondary flex-shrink-0 mt-1" />
                   <div>
                     <p className="font-semibold text-foreground mb-1">Studio Hours</p>
-                    <p className="text-muted-foreground">
-                      Monday - Saturday: 11:00 AM - 7:00 PM<br />
-                      Sunday: By appointment only
-                    </p>
+                    <p className="text-muted-foreground">10 am–8 pm daily</p>
                   </div>
                 </div>
 
@@ -65,7 +60,7 @@ const StudioMap = () => {
                     We'd love to meet you in person! Browse our complete portfolio, watch full wedding films on our cinema display, and discuss your vision over coffee.
                   </p>
                   <a
-                    href="https://maps.google.com/?q=Bandra+West+Mumbai"
+                    href="https://www.google.com/maps/place/The+Wedding+Cult/@28.4234107,77.0717287,15z/data=!4m10!1m2!2m1!1sHouse+no.+2015,+Block+B1,+Sector+57,+Gurugram,+Haryana+122003!3m6!1s0x390d194c75db287f:0x142d8135eba4f0cb!8m2!3d28.4285374!4d77.0860365!15sCj1Ib3VzZSBuby4gMjAxNSwgQmxvY2sgQjEsIFNlY3RvciA1NywgR3VydWdyYW0sIEhhcnlhbmEgMTIyMDAzWjoiOGhvdXNlIG5vIDIwMTUgYmxvY2sgYjEgc2VjdG9yIDU3IGd1cnVncmFtIGhhcnlhbmEgMTIyMDAzkgEUd2VkZGluZ19waG90b2dyYXBoZXKaASNDaFpEU1VoTk1HOW5TMFZKUTBGblNVUnRibUV6ZEU5bkVBReABAPoBBAgAEEY!16s%2Fg%2F11ns0qv5lx?entry=ttu&g_ep=EgoyMDI1MTAyOS4yIKXMDSoASAFQAw%3D%3D"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-block text-secondary hover:text-accent font-medium transition-colors"

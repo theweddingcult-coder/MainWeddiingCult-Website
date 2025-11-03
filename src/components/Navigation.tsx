@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import logo from "@/assets/logo.png";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -54,9 +55,10 @@ const Navigation = () => {
             {/* Logo */}
             <button
               onClick={() => scrollToSection("hero")}
-              className="text-xxl md:text-2xl font-heading font-bold text-primary hover:text-secondary transition-colors "
+              className="flex items-center gap-2"
+              aria-label="the wedding cult home"
             >
-             The Wedding Cult
+              <img src={logo} alt="the wedding cult" className="h-20 md:h-20 w-auto" />
             </button>
 
             {/* Desktop Navigation */}

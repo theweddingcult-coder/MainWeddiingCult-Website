@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Award, Camera, Heart } from "lucide-react";
+import ownersImage from "@/assets/Owners-Image.jpg"
 
 const About = () => {
   const scrollToContact = () => {
@@ -19,14 +20,13 @@ const About = () => {
           {/* Image */}
           <div className="relative">
             <div className="aspect-[3/4] rounded-2xl overflow-hidden shadow-elevated">
-              <img
-                
+              <img src={ownersImage}
                 alt="Professional wedding photographer portrait"
                 className="w-full h-full object-cover"
               />
             </div>
             <div className="absolute -bottom-6 -right-6 bg-secondary text-foreground p-6 rounded-xl shadow-gold hidden md:block">
-              <p className="text-4xl font-heading font-bold">8+</p>
+              <p className="text-4xl font-heading font-bold">28+</p>
               <p className="text-sm">Years Experience</p>
             </div>
           </div>
@@ -34,12 +34,12 @@ const About = () => {
           {/* Content */}
           <div>
             <h2 className="text-4xl md:text-5xl font-heading font-bold text-primary mb-6">
-              Meet Gulshan Kumar
+              Meet Gulshaan Kumar
             </h2>
             <div className="w-24 h-1 bg-secondary mb-8" />
             
             <p className="text-muted-foreground text-lg leading-relaxed mb-6">
-              With over 8 years capturing Indian weddings across Mumbai, Delhi, Jaipur, and beyond, I blend candid storytelling with editorial finesse. From haldi laughter to mehndi artistry and grand pheras, my approach is unobtrusive yet intentional—so you can relive the feeling, not just the frame.
+              With over 28 years capturing Indian weddings across Mumbai, Delhi, Jaipur, and beyond, I blend candid storytelling with editorial finesse. From haldi laughter to mehndi artistry and grand pheras, my approach is unobtrusive yet intentional—so you can relive the feeling, not just the frame.
             </p>
 
             <p className="text-muted-foreground text-lg leading-relaxed mb-8">
@@ -65,7 +65,7 @@ const About = () => {
               <div className="flex items-start gap-3">
                 <Heart className="w-6 h-6 text-secondary flex-shrink-0 mt-1" />
                 <div>
-                  <p className="font-semibold text-foreground">Based in Mumbai</p>
+                  <p className="font-semibold text-foreground">Based in Gurugram</p>
                   <p className="text-sm text-muted-foreground">Available across India</p>
                 </div>
               </div>

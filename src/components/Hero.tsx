@@ -63,7 +63,7 @@ const Hero = () => {
             Soulful Wedding Stories
           </h1>
           <p className="md:text-2xl text-lg font-light text-primary-foreground max-w-2xl mx-auto mb-0">
-            At The Wedding Cult, we turn your shaadi moments into everlasting memories.
+            At the wedding cult, we turn your shaadi moments into everlasting memories.
           </p>
         </div>
         <div className="flex flex-col sm:flex-row gap-4 justify-center w-full max-w-2xl">
