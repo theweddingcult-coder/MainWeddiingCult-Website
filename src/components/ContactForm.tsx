@@ -14,10 +14,21 @@ import {
 } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { MessageCircle } from "lucide-react";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 
 const ContactForm = () => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showTerms, setShowTerms] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -31,9 +42,11 @@ const ContactForm = () => {
     consent: false,
   });
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
+    if (isSubmitting) return;
+
     if (!formData.consent) {
       toast({
         title: "Consent Required",
@@ -43,8 +56,11 @@ const ContactForm = () => {
       return;
     }
 
-    setIsSubmitting(true);
+    setShowTerms(true);
+  };
 
+  const sendEnquiry = async () => {
+    setIsSubmitting(true);
     const serviceId = (import.meta.env.VITE_EMAILJS_SERVICE_ID as string) || "service_a11jexo";
     const userTemplateId = (import.meta.env.VITE_EMAILJS_TEMPLATE_ID as string) || (import.meta.env.VITE_EMAILJS_TEMPLATE_ID_USER as string);
     const adminTemplateId = (import.meta.env.VITE_EMAILJS_TEMPLATE_ID_ADMIN as string) || undefined;
@@ -133,6 +149,11 @@ const ContactForm = () => {
     }
   };
 
+  const handleTermsAgree = async () => {
+    setShowTerms(false);
+    await sendEnquiry();
+  };
+
   const handleServiceToggle = (service: string) => {
     setFormData(prev => ({
       ...prev,
@@ -203,10 +224,10 @@ const ContactForm = () => {
                     <SelectValue placeholder="Select event type" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="wedding">Wedding</SelectItem>
+                    <SelectItem value="wedding">wedding</SelectItem>
                     <SelectItem value="haldi">Haldi</SelectItem>
                     <SelectItem value="mehndi">Mehndi</SelectItem>
-                    <SelectItem value="pre-wedding">Pre-Wedding</SelectItem>
+                    <SelectItem value="pre-wedding">Pre-wedding</SelectItem>
                     <SelectItem value="baby-shower">Baby Shower</SelectItem>
                     <SelectItem value="multiple">Multiple Events</SelectItem>
                   </SelectContent>
@@ -315,6 +336,37 @@ const ContactForm = () => {
           </div>
         </div>
       </div>
+
+      <AlertDialog open={showTerms} onOpenChange={(open) => setShowTerms(open)}>
+        <AlertDialogContent className="max-w-xl">
+          <AlertDialogHeader>
+            <AlertDialogTitle>Terms & Conditions</AlertDialogTitle>
+            <AlertDialogDescription className="space-y-4 text-foreground">
+              <p>
+                By submitting this form, you acknowledge that the wedding cult team may contact you via phone, WhatsApp, or email
+                regarding your enquiry. We will only use the information supplied to craft proposals, share availability, and coordinate services.
+              </p>
+              <p>
+                Your data stays private: we do not sell or share your details with third parties. You may request deletion of your information at any time by
+                emailing <a href="mailto:theweddingcult@gmail.com" className="underline">theweddingcult@gmail.com</a>.
+              </p>
+              <p>
+                Please confirm that you understand and accept these conditions before we send your enquiry.
+              </p>
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter className="gap-3 sm:gap-2">
+            <AlertDialogCancel disabled={isSubmitting}>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={handleTermsAgree}
+              disabled={isSubmitting}
+              className="bg-primary text-primary-foreground hover:bg-secondary hover:text-foreground"
+            >
+              {isSubmitting ? "Sending..." : "I Agree & Send"}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </section>
   );
 };

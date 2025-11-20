@@ -1,4 +1,4 @@
-# The Wedding Cult
+# The weddiing Cult
 
 ## Tech Stack
 

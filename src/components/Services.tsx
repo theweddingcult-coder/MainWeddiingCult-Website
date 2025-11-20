@@ -1,13 +1,13 @@
-import { Heart, Sparkles, Gift, Cake, Building2, Users } from "lucide-react";
+import { Heart, Sparkles, Gift, Cake, Hand, Users } from "lucide-react";
 
 const services = [
   {
     icon: Heart,
-    title: "Hindu Weddings",
+    title: "weddings",
   },
   {
     icon: Sparkles,
-    title: "Pre-Wedding",
+    title: "Pre-wedding",
   },
   {
     icon: Gift,
@@ -15,15 +15,15 @@ const services = [
   },
   {
     icon: Cake,
-    title: "Birthdays",
+    title: "Receptions",
   },
   {
-    icon: Building2,
-    title: "Corporate",
+    icon: Hand,
+    title: "Mehendi",
   },
   {
     icon: Users,
-    title: "Parties",
+    title: "Haldi",
   },
 ];
 

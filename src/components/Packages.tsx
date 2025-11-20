@@ -30,7 +30,7 @@ const packages: Package[] = [
   },
   {
     name: "Classic",
-    tagline: "Ideal for wedding day + one ceremony",
+    tagline: "Ideal for weddiing day + one ceremony",
     price: "Starting at ₹95,000",
     features: [
       { text: "2 photographers + 1 videographer" },

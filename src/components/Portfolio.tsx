@@ -2,413 +2,50 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import React from "react";
+import { type FilterType, type PortfolioItem, portfolioItems } from "@/data/portfolioItems";
+import { Skeleton } from "@/components/ui/skeleton";
+import { useImagePreloader } from "@/hooks/useImagePreloader";
+import { useImageLinkWarmup } from "@/hooks/useImageLinkWarmup";
+import {
+  buildDriveImageUrl,
+  extractDriveFileId,
+  type DriveImageVariant,
+} from "@/lib/googleDrive";
 
-type FilterType = "All" | "Wedding" | "Haldi" | "Mehndi" | "Pre-Wedding" | "Baby shoot" | "Shagan";
+const IMAGES_PER_BATCH = 9;
+const FALLBACK_VARIANTS: DriveImageVariant[] = ["cdn", "download", "view", "thumbnail"];
 
-interface PortfolioItem {
-  id: number;
-  image: string;
-  category: FilterType;
-}
-
-// Update these image URLs as needed; external links will render directly
-const portfolioItems: PortfolioItem[] = [
-  {
-    id: 1,
-    image:
-      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Wedding/39.jpg",
-    category: "Wedding",
-  },
-  {
-    id: 2,
-    image:
-      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Wedding/bbb%20(473).JPG",
-    category: "Wedding",
-  },
-  {
-    id: 3,
-    image:
-      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Wedding/SPV60738.JPG",
-    category: "Wedding",
-  },
-  {
-    id: 4,
-    image:
-      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Baby%20Shoot/SPV%20(124).JPG",
-    category: "Baby shoot",
-  },
-  {
-    id: 5,
-    image:
-      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Haldi/abc%20(1754).JPG",
-    category: "Haldi",
-  },
-  {
-    id: 6,
-    image:
-      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Parth%20and%20Khushi/011A5174.JPG",
-    category: "Pre-Wedding",
-  },
-  {
-    id: 7,
-    image:
-      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Mehendi/SPV65729.JPG",
-    category: "Mehndi",
-  },
-  {
-    id: 8,
-    image:
-      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Haldi/35.jpg",
-    category: "Haldi",
-  },
-  {
-    id: 9,
-    image:
-      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Baby%20Shoot/SPV%20(662).JPG",
-    category: "Baby shoot",
-  },
-  {
-    id: 10,
-    image:
-      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Wedding/SPV60832.JPG",
-    category: "Wedding",
-  },
-  {
-    id: 11,
-    image:
-      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Mehendi/abc%20(60).JPG",
-    category: "Pre-Wedding",
-  },
-  {
-    id: 12,
-    image:
-      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Mehendi/SPV65583.JPG",
-    category: "Mehndi",
-  },
-  {
-    id: 13,
-    image:
-      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Shagan/10%20-%20Copy%20(2).jpg",
-    category: "Shagan",
-  },
-  {
-    id: 14,
-    image:
-      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Shagan/18%20-%20Copy%20(2).jpg",
-    category: "Wedding",
-  },
-  {
-    id: 15,
-    image:
-      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/PreWedding/_11A3289.JPG",
-    category: "Pre-Wedding",
-  },
-  {
-    id: 16,
-    image:
-      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Baby%20Shoot/SPV%20(513).JPG",
-    category: "Baby shoot",
-  },
-  {
-    id: 17,
-    image:
-      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Baby%20Shoot/SPV%20(87).JPG",
-    category: "Baby shoot",
-  },
-  {
-    id: 18,
-    image:
-      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Parth%20and%20Khushi/SPV61179%20copy.jpg",
-    category: "Pre-Wedding",
-  },
-  {
-    id: 19,
-    image:
-      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Baby%20Shoot/SPV%20(134).JPG",
-    category: "Baby shoot",
-  },
-  {
-    id: 20,
-    image:
-      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Haldi/20%20-%20Copy%20(2).jpg",
-    category: "Haldi",
-  },
-  {
-    id: 21,
-    image:
-      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/PreWedding/_11A3133.JPG",
-    category: "Pre-Wedding",
-  },
-  {
-    id: 22,
-    image:
-      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Mehendi/abc%20(53).JPG",
-    category: "Mehndi",
-  },
-  {
-    id: 23,
-    image:
-      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Wedding/aaa%20(74).JPG",
-    category: "Wedding",
-  },
-  {
-    id: 24,
-    image:
-      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/PreWedding/_11A3084.JPG",
-    category: "Pre-Wedding",
-  },
-  {
-    id: 25,
-    image:
-      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Shagan/_11A0987.JPG",
-    category: "Shagan",
-  },
-  {
-    id: 26,
-    image:
-      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/PreWedding/_11A2832.JPG",
-    category: "Pre-Wedding",
-  },
-  {
-    id: 27,
-    image:
-      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Baby%20Shoot/SPV%20(308).JPG",
-    category: "Baby shoot",
-  },
-  {
-    id: 28,
-    image:
-      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Haldi/24%20-%20Copy%20(2).jpg",
-    category: "Haldi",
-  },
-  {
-    id: 29,
-    image:
-      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/PreWedding/_11A3270.JPG",
-    category: "Pre-Wedding",
-  },
-  {
-    id: 30,
-    image:
-      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Mehendi/abc%20(54).JPG",
-    category: "Mehndi",
-  },
-  {
-    id: 31,
-    image:
-      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Wedding/bbb%20(455).JPG",
-    category: "Wedding",
-  },
-  {
-    id: 32,
-    image:
-      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/PreWedding/_11A3299.JPG",
-    category: "Pre-Wedding",
-  },
-  {
-    id: 33,
-    image:
-      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Shagan/_11A0997.JPG",
-    category: "Shagan",
-  },
-  {
-    id: 34,
-    image:
-      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/PreWedding/_11A3536.JPG",
-    category: "Pre-Wedding",
-  },
-  {
-    id: 35,
-    image:
-      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Baby%20Shoot/SPV%20(507).JPG",
-    category: "Baby shoot",
-  },
-  {
-    id: 36,
-    image:
-      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Haldi/SPV60023.JPG",
-    category: "Haldi",
-  },
-  {
-    id: 37,
-    image:
-      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/PreWedding/SPV67543.JPG",
-    category: "Pre-Wedding",
-  },
-  {
-    id: 38,
-    image:
-      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Mehendi/SPV65736.JPG",
-    category: "Mehndi",
-  },
-  {
-    id: 39,
-    image:
-      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Wedding/bbb%20(473).JPG",
-    category: "Wedding",
-  },
-  {
-    id: 40,
-    image:
-      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Parth%20and%20Khushi/011A5185.JPG",
-    category: "Pre-Wedding",
-  },
-  {
-    id: 41,
-    image:
-      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Shagan/_11A1003.JPG",
-    category: "Shagan",
-  },
-  {
-    id: 42,
-    image:
-      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Parth%20and%20Khushi/011A5233.JPG",
-    category: "Pre-Wedding",
-  },
-  {
-    id: 43,
-    image:
-      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Baby%20Shoot/SPV%20(509).JPG",
-    category: "Baby shoot",
-  },
-  {
-    id: 44,
-    image:
-      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Haldi/SPV69752.JPG",
-    category: "Haldi",
-  },
-  {
-    id: 45,
-    image:
-      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Parth%20and%20Khushi/011A5280.JPG",
-    category: "Pre-Wedding",
-  },
-  {
-    id: 46,
-    image:
-      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Mehendi/abc%20(58).JPG",
-    category: "Mehndi",
-  },
-  {
-    id: 47,
-    image:
-      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Wedding/SPV60832.JPG",
-    category: "Wedding",
-  },
-  {
-    id: 48,
-    image:
-      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Parth%20and%20Khushi/011A5287.JPG",
-    category: "Pre-Wedding",
-  },
-  {
-    id: 49,
-    image:
-      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Shagan/09%20-%20Copy%20(2).jpg",
-    category: "Shagan",
-  },
-  {
-    id: 50,
-    image:
-      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Parth%20and%20Khushi/011A5335.JPG",
-    category: "Pre-Wedding",
-  },
-  {
-    id: 51,
-    image:
-      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Baby%20Shoot/SPV%20(512).JPG",
-    category: "Baby shoot",
-  },
-  {
-    id: 52,
-    image:
-      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Haldi/SPV66690.JPG",
-    category: "Haldi",
-  },
-  {
-    id: 53,
-    image:
-      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Parth%20and%20Khushi/011A5346.JPG",
-    category: "Pre-Wedding",
-  },
-  {
-    id: 54,
-    image:
-      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Mehendi/abc%20(73).JPG",
-    category: "Mehndi",
-  },
-  {
-    id: 55,
-    image:
-      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Wedding/SPV69626.JPG",
-    category: "Wedding",
-  },
-  {
-    id: 56,
-    image:
-      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Parth%20and%20Khushi/011A5402%20copy.jpg",
-    category: "Pre-Wedding",
-  },
-  {
-    id: 57,
-    image:
-      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Shagan/14%20-%20Copy.jpg",
-    category: "Shagan",
-  },
-  {
-    id: 58,
-    image:
-      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Parth%20and%20Khushi/SPV60969.JPG",
-    category: "Pre-Wedding",
-  },
-  {
-    id: 59,
-    image:
-      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Wedding/SPV68869.JPG",
-    category: "Wedding",
-  },
-  {
-    id: 60,
-    image:
-      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Parth%20and%20Khushi/SPV61001.JPG",
-    category: "Pre-Wedding",
-  },
-  {
-    id: 61,
-    image:
-      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Wedding/bbb%20(904).JPG",
-    category: "Wedding",
-  },
-  {
-    id: 62,
-    image:
-      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Shagan/18%20-%20Copy%20(2).jpg",
-    category: "Shagan",
-  },
-  {
-    id: 63,
-    image:
-      "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Parth%20and%20Khushi/SPV61024.JPG",
-    category: "Pre-Wedding",
-  },
-]
-
-const IMAGES_PER_PAGE = 9;
-
-const Portfolio = () => {
+const Portfolio: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState<FilterType>("All");
-  const [visibleBatches, setVisibleBatches] = useState(1);
+  const [visibleBatches, setVisibleBatches] = useState<number>(1);
   const [selectedItem, setSelectedItem] = useState<PortfolioItem | null>(null);
+  const [imageErrors, setImageErrors] = useState<Set<number>>(new Set());
+  const [loadedImages, setLoadedImages] = useState<Set<number>>(() => new Set());
 
-  const filters: FilterType[] = [
-    "All",
-    "Wedding",
-    "Haldi",
-    "Mehndi",
-    "Pre-Wedding",
-    "Baby shoot",
-    "Shagan",
-  ];
+  const filterOptions = React.useMemo<Array<{ label: string; value: FilterType }>>(
+    () => [
+      { label: "All", value: "All" },
+      { label: "Wedding", value: "Wedding" },
+      { label: "Haldi", value: "Haldi" },
+      { label: "Mehndi", value: "Mehndi" },
+      { label: "Pre-Wedding", value: "Pre-Wedding" },
+      { label: "Shagan", value: "Shagan" },
+    ],
+    []
+  );
+  const categoryLabelMap = React.useMemo(() => {
+    return filterOptions.reduce<Record<FilterType, string>>((acc, option) => {
+      acc[option.value] = option.label;
+      return acc;
+    }, {} as Record<FilterType, string>);
+  }, [filterOptions]);
+
+  const directImageUrls = React.useMemo(
+    () => portfolioItems.map((item) => item.image),
+    []
+  );
+  useImagePreloader(directImageUrls, { priorityCount: 24, throttleMs: 75 });
+  useImageLinkWarmup(directImageUrls);
 
   const filteredItems =
     activeFilter === "All"
@@ -423,7 +60,7 @@ const Portfolio = () => {
   React.useEffect(() => {
     if (!selectedItem) return;
 
-    const handleKeyDown = (event: KeyboardEvent) => {
+    const handleKeyDown = (event: KeyboardEvent): void => {
       if (event.key === "Escape") {
         setSelectedItem(null);
       }
@@ -435,10 +72,11 @@ const Portfolio = () => {
     };
   }, [selectedItem]);
 
-  const imagesToShow = filteredItems.slice(0, visibleBatches * IMAGES_PER_PAGE);
+  const imagesToShow = filteredItems.slice(0, visibleBatches * IMAGES_PER_BATCH);
   const hasMore = imagesToShow.length < filteredItems.length;
+  const canViewLess = visibleBatches > 1;
 
-  const scrollToContact = () => {
+  const scrollToContact = (): void => {
     const element = document.getElementById("contact");
     if (element) {
       const offset = 80;
@@ -446,6 +84,58 @@ const Portfolio = () => {
       const offsetPosition = elementPosition + window.pageYOffset - offset;
       window.scrollTo({ top: offsetPosition, behavior: "smooth" });
     }
+  };
+
+  const handleImageLoad = (itemId: number) => {
+    setImageErrors((prev) => {
+      if (!prev.has(itemId)) return prev;
+      const next = new Set(prev);
+      next.delete(itemId);
+      return next;
+    });
+    setLoadedImages((prev) => {
+      if (prev.has(itemId)) return prev;
+      const next = new Set(prev);
+      next.add(itemId);
+      return next;
+    });
+  };
+
+  const resetLoadedState = (itemId: number) => {
+    setLoadedImages((prev) => {
+      if (!prev.has(itemId)) return prev;
+      const next = new Set(prev);
+      next.delete(itemId);
+      return next;
+    });
+  };
+
+  const handleImageError = (
+    e: React.SyntheticEvent<HTMLImageElement, Event>,
+    itemId: number
+  ): void => {
+    const target = e.currentTarget;
+    const driveId = target.dataset.driveId || extractDriveFileId(target.currentSrc || "");
+
+    if (!driveId) {
+      setImageErrors((prev) => new Set(prev).add(itemId));
+      resetLoadedState(itemId);
+      return;
+    }
+
+    const currentVariant = (target.dataset.driveVariant as DriveImageVariant) || "cdn";
+    const currentIndex = FALLBACK_VARIANTS.indexOf(currentVariant);
+    const nextVariant = FALLBACK_VARIANTS[currentIndex + 1];
+
+    if (!nextVariant) {
+      setImageErrors((prev) => new Set(prev).add(itemId));
+      resetLoadedState(itemId);
+      return;
+    }
+
+    target.dataset.driveVariant = nextVariant;
+    target.src = buildDriveImageUrl(driveId, nextVariant);
+    resetLoadedState(itemId);
   };
 
   return (
@@ -463,86 +153,154 @@ const Portfolio = () => {
 
         {/* Filter Pills */}
         <div className="flex flex-wrap justify-center gap-3 mb-12">
-          {filters.map((filter) => (
+          {filterOptions.map((option) => (
             <Badge
-              key={filter}
-              variant={activeFilter === filter ? "default" : "outline"}
+              key={option.value}
+              variant={activeFilter === option.value ? "default" : "outline"}
               className={`cursor-pointer px-6 py-2 text-sm font-medium rounded-full transition-all duration-300 hover-lift ${
-                activeFilter === filter
+                activeFilter === option.value
                   ? "bg-primary text-primary-foreground border-primary"
                   : "bg-transparent text-foreground border-muted hover:border-secondary hover:text-secondary"
               }`}
-              onClick={() => setActiveFilter(filter)}
+              onClick={() => setActiveFilter(option.value)}
             >
-              {filter}
+              {option.label}
             </Badge>
           ))}
         </div>
 
         {/* Gallery Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-          {imagesToShow.map((item) => (
-            <div
-              key={item.id}
-              className="group relative overflow-hidden rounded-xl shadow-soft hover:shadow-elevated transition-all duration-300 hover-lift cursor-pointer aspect-[4/5]"
-              onClick={() => setSelectedItem(item)}
-            >
-              <img
-                src={item.image}
-                alt={`${item.category} showcase`}
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                loading="lazy"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <div className="absolute bottom-0 left-0 right-0 p-6 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                  <Badge className="bg-secondary text-foreground mb-2">
-                    {item.category}
-                  </Badge>
-                </div>
+          {imagesToShow.map((item, index) => {
+            const priority = index < 6 ? "high" : "low";
+            const driveId = extractDriveFileId(item.image);
+            const imageUrl = item.image;
+            const isLoaded = loadedImages.has(item.id);
+            const hasError = imageErrors.has(item.id);
+
+            return (
+              <div
+                key={item.id}
+                className="group relative overflow-hidden rounded-xl shadow-soft hover:shadow-elevated transition-all duration-300 hover-lift cursor-pointer aspect-[4/5]"
+                onClick={() => setSelectedItem(item)}
+              >
+                {hasError ? (
+                  <div className="w-full h-full flex items-center justify-center bg-muted">
+                    <div className="text-center p-6">
+                      <p className="text-muted-foreground mb-2">Failed to load image</p>
+                      <p className="text-xs text-muted-foreground">Please check image permissions</p>
+                    </div>
+                  </div>
+                ) : (
+                  <>
+                    {!isLoaded && (
+                      <Skeleton className="absolute inset-0 h-full w-full animate-pulse" />
+                    )}
+                    <img
+                      ref={(node) => {
+                        if (node) {
+                          node.setAttribute("fetchpriority", priority);
+                          if (driveId) {
+                            node.dataset.driveId = driveId;
+                            node.dataset.driveVariant = "cdn";
+                          }
+                        }
+                      }}
+                      src={imageUrl}
+                      alt={`${item.category} showcase`}
+                      className={[
+                        "w-full h-full object-cover transition-transform duration-500 group-hover:scale-110",
+                        isLoaded ? "opacity-100" : "opacity-0",
+                      ].join(" ")}
+                      loading="lazy"
+                      decoding="async"
+                      referrerPolicy="no-referrer"
+                      onError={(e) => handleImageError(e, item.id)}
+                      onLoad={() => handleImageLoad(item.id)}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="absolute bottom-0 left-0 right-0 p-6 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                        <Badge className="bg-secondary text-foreground mb-2">
+                          {categoryLabelMap[item.category] ?? item.category}
+                        </Badge>
+                      </div>
+                    </div>
+                  </>
+                )}
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
-        {selectedItem && (
-          <div
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4"
-            onClick={() => setSelectedItem(null)}
-          >
-            <div
-              className="relative flex max-h-[90vh] max-w-[95vw] flex-col items-center gap-4"
-              onClick={(event) => event.stopPropagation()}
-            >
-              <img
-                src={selectedItem.image}
-                alt={`${selectedItem.category} showcase`}
-                className="max-h-[80vh] max-w-[90vw] object-contain"
-              />
-              <Badge className="bg-secondary text-foreground">
-                {selectedItem.category}
-              </Badge>
-              <Button
-                variant="outline"
-                className="absolute -top-3 -right-3 rounded-full border-white/70 bg-white/10 text-white hover:bg-white/30"
+        {selectedItem &&
+          (() => {
+            const selectedDriveId = extractDriveFileId(selectedItem.image);
+            const modalImageSrc = selectedDriveId
+              ? buildDriveImageUrl(selectedDriveId, "cdn")
+              : selectedItem.image;
+
+            return (
+              <div
+                className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4"
                 onClick={() => setSelectedItem(null)}
               >
-                Close
-              </Button>
-            </div>
-          </div>
-        )}
+                <div
+                  className="relative flex max-h-[90vh] max-w-[95vw] flex-col items-center gap-4"
+                  onClick={(event) => event.stopPropagation()}
+                >
+                  {!loadedImages.has(selectedItem.id) && (
+                    <Skeleton className="absolute inset-0 h-full w-full animate-pulse rounded-xl" />
+                  )}
+                  <img
+                    src={modalImageSrc}
+                    alt={`${selectedItem.category} showcase`}
+                    className={[
+                      "max-h-[80vh] max-w-[90vw] object-contain transition-opacity",
+                      loadedImages.has(selectedItem.id) ? "opacity-100" : "opacity-0",
+                    ].join(" ")}
+                    onError={(e) => handleImageError(e, selectedItem.id)}
+                    onLoad={() => handleImageLoad(selectedItem.id)}
+                    referrerPolicy="no-referrer"
+                  />
+                  <Badge className="bg-secondary text-foreground">
+                    {selectedItem.category}
+                  </Badge>
+                  <Button
+                    variant="outline"
+                    className="absolute -top-3 -right-3 rounded-full border-white/70 bg-white/10 text-white hover:bg-white/30"
+                    onClick={() => setSelectedItem(null)}
+                  >
+                    Close
+                  </Button>
+                </div>
+              </div>
+            );
+          })()}
+
         {/* View More Button */}
-        {hasMore && (
-          <div className="flex justify-center mb-12">
-            <Button
-              variant="outline"
-              className="px-8 py-2 rounded-full border-secondary text-secondary hover:bg-secondary/20 transition-all"
-              onClick={() => setVisibleBatches((v) => v + 1)}
-            >
-              View More
-            </Button>
+        {(hasMore || canViewLess) && (
+          <div className="flex flex-wrap justify-center gap-4 mb-12">
+            {hasMore && (
+              <Button
+                variant="outline"
+                className="px-8 py-2 rounded-full border-secondary text-secondary hover:bg-secondary/20 transition-all"
+                onClick={() => setVisibleBatches((v) => v + 1)}
+              >
+                View More
+              </Button>
+            )}
+            {canViewLess && (
+              <Button
+                variant="ghost"
+                className="px-8 py-2 rounded-full text-secondary hover:text-secondary/80 transition-all"
+                onClick={() => setVisibleBatches(1)}
+              >
+                View Less
+              </Button>
+            )}
           </div>
         )}
+
         {/* CTA */}
         <div className="text-center">
           <p className="text-muted-foreground mb-6 text-lg">

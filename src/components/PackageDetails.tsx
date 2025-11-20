@@ -78,7 +78,7 @@ const PackageDetails = () => {
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-secondary mt-1">•</span>
-                    <span>For destination weddings, we provide a detailed travel estimate after location confirmation</span>
+                    <span>For destination weddiings, we provide a detailed travel estimate after location confirmation</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-secondary mt-1">•</span>
@@ -191,7 +191,7 @@ const PackageDetails = () => {
                         <span className="text-secondary font-medium">₹3,500/hour</span>
                       </li>
                       <li className="flex justify-between">
-                        <span>Pre-wedding shoot (4 hours)</span>
+                        <span>Pre-weddiing shoot (4 hours)</span>
                         <span className="text-secondary font-medium">₹25,000</span>
                       </li>
                     </ul>

@@ -8,7 +8,7 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Royal Indian Wedding Color Palette */
+    /* Royal Indian weddiing Color Palette */
     --background: 30 100% 97%; /* Ivory #FFF7EF */
     --foreground: 30 7% 11%; /* Warm charcoal #1F1D1B */
 
@@ -118,4 +118,5 @@ All colors MUST be HSL.
   .text-gradient-gold {
     @apply bg-gradient-to-r from-secondary to-accent bg-clip-text text-transparent;
   }
+
 }

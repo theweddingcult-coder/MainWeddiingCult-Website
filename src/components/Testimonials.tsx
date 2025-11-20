@@ -4,19 +4,19 @@ import { Star } from "lucide-react";
 const testimonials = [
   {
     name: "Priya & Rahul",
-    event: "Hindu Wedding, Jaipur",
+    event: "Hindu weddiing, Jaipur",
     text: "Absolutely blown away by the quality of work! They captured every emotion, every tear, every smile so beautifully. Our families still can't stop watching the highlight film.",
     rating: 5,
   },
   {
     name: "Ananya Sharma",
-    event: "Pre-Wedding Shoot, Goa",
+    event: "Pre-weddiing Shoot, Goa",
     text: "We were nervous about being in front of the camera, but they made us feel so comfortable. The photos came out like a dream – cinematic, natural, and so 'us'. Highly recommend!",
     rating: 5,
   },
   {
     name: "Vikram & Meera",
-    event: "Multi-day Wedding, Udaipur",
+    event: "Multi-day weddiing, Udaipur",
     text: "From mehndi to pheras, they were there capturing moments we didn't even realize happened. The documentary film is now a family heirloom. Professional, punctual, and incredibly talented.",
     rating: 5,
   },

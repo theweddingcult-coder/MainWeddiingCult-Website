@@ -1,20 +1,23 @@
 import { Button } from "@/components/ui/button";
 import { ChevronDown } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
-
-// Use an array of hero image URLs
-const heroImages = [
-  "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Wedding/39.jpg",
-  "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/PreWedding/_11A3453.JPG",
-  "https://ncfewnymjjkloxvtlypy.supabase.co/storage/v1/object/public/Images/Haldi/32.jpg",
-  // Add more if desired
-];
+import { useEffect, useMemo, useRef, useState } from "react";
+import { useImagePreloader } from "@/hooks/useImagePreloader";
+import { useImageLinkWarmup } from "@/hooks/useImageLinkWarmup";
+import { pickPortfolioImageUrls } from "@/data/portfolioItems";
 
 const CAROUSEL_INTERVAL = 4000; // ms
+const HERO_IMAGE_COUNT = 6;
 
 const Hero = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const heroImages = useMemo(
+    () => pickPortfolioImageUrls(HERO_IMAGE_COUNT, "cdn"),
+    []
+  );
+
+  useImagePreloader(heroImages, { priorityCount: heroImages.length, throttleMs: 60 });
+  useImageLinkWarmup(heroImages);
 
   // Carousel auto-advance logic
   useEffect(() => {
@@ -60,10 +63,10 @@ const Hero = () => {
       <div className="absolute left-1/2 -translate-x-1/2 bottom-20 z-40 w-full flex flex-col items-center px-4 space-y-5">
         <div className="max-w-4xl mx-auto text-center animate-fade-in">
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-heading font-bold text-primary-foreground leading-tight mb-3">
-            Soulful Wedding Stories
+            Soulful wedding Stories
           </h1>
           <p className="md:text-2xl text-lg font-light text-primary-foreground max-w-2xl mx-auto mb-0">
-            At the wedding cult, we turn your shaadi moments into everlasting memories.
+            At the weddiing cult, we turn your shaadi moments into everlasting memories.
           </p>
         </div>
         <div className="flex flex-col sm:flex-row gap-4 justify-center w-full max-w-2xl">

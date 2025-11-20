@@ -20,7 +20,7 @@ const Footer = () => {
           {/* About */}
           <div>
             <h3 className="text-2xl font-heading font-bold mb-4 text-secondary">
-              the wedding cult
+              the weddiing cult
             </h3>
             <p className="text-primary-foreground/80 text-sm leading-relaxed">
               Capturing the essence of Indian celebrations with warmth, authenticity, and cinematic beauty. Every frame tells your unique story.
@@ -56,7 +56,7 @@ const Footer = () => {
               </li>
               <li className="flex items-start gap-3 text-primary-foreground/80 text-sm">
                 <Mail className="w-4 h-4 mt-0.5 flex-shrink-0" />
-                <a href="mailto:theweddingcult@gmail.com" className="hover:text-secondary transition-colors">
+                <a href="mailto:theweddiingcult@gmail.com" className="hover:text-secondary transition-colors">
                   theweddingcult@gmail.com
                 </a>
               </li>
@@ -72,7 +72,7 @@ const Footer = () => {
             <h4 className="font-semibold mb-4 text-secondary">Follow Us</h4>
             <div className="flex gap-4 mb-6">
               <a
-                href="https://www.instagram.com/the_wedding_cult"
+                href="https://www.instagram.com/the_weddiing_cult"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full border border-secondary flex items-center justify-center text-secondary hover:bg-secondary hover:text-primary transition-all duration-300"
@@ -81,7 +81,7 @@ const Footer = () => {
                 <Instagram size={20} />
               </a>
               <a
-                href="https://www.youtube.com/@theweddingcult9471"
+                href="https://www.youtube.com/@theweddiingcult9471"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full border border-secondary flex items-center justify-center text-secondary hover:bg-secondary hover:text-primary transition-all duration-300"
@@ -118,7 +118,7 @@ const Footer = () => {
       <div className="border-t border-secondary/20">
         <div className="container mx-auto px-4 py-6">
           <p className="text-center text-primary-foreground/60 text-sm">
-            © {currentYear} the wedding cult. Made with love in Gurugram.
+            © {currentYear} the weddiing cult. Made with love By JPConsultancy.
           </p>
         </div>
       </div>
