@@ -217,8 +217,7 @@ export const WelcomeScreen = ({
       aria-hidden={!overlayHidden}
       className={[
         "fixed inset-0 z-[999] flex min-h-screen w-full items-center justify-center",
-        "bg-gradient-to-br from-maroon/95 via-[#1f1d1b]/90 to-[#2b1812]/95",
-        "backdrop-blur-[3px] text-ivory pointer-events-none overscroll-none",
+        "bg-[#f7eee5] text-[#7e3405] pointer-events-none overscroll-none",
         "grain-texture overflow-hidden",
         transitionClass,
         overlayState === "fading" ? "opacity-0" : "opacity-100",
@@ -229,7 +228,7 @@ export const WelcomeScreen = ({
           <div
             className={[
               "text-3xl sm:text-4xl md:text-6xl tracking-[0.3em] sm:tracking-[0.35em] uppercase font-heading",
-              "text-ivory/90 drop-shadow-lg leading-tight",
+              "text-[#7e3405]/95 drop-shadow-lg leading-tight",
               "transform",
               transitionClass,
               phaseVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4",
