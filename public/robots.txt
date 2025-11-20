@@ -13,5 +13,4 @@ Allow: /
 User-agent: *
 Allow: /
 
-# Update the URL below to your production domain
-Sitemap: https://theweddiingcult.com/sitemap.xml
+Sitemap: https://theweddiingcult.in/sitemap.xml
