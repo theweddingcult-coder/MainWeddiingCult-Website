@@ -9,7 +9,7 @@ import Packages from "@/components/Packages";
 import PackageDetails from "@/components/PackageDetails";
 import About from "@/components/About";
 import Testimonials from "@/components/Testimonials";
-import StudioMap from "@/components/StudioMap";
+import OfficeMap from "@/components/OfficeMap";
 import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
 import WelcomeScreen from "@/components/WelcomeScreen";
@@ -37,7 +37,7 @@ const Index = () => {
       {showWelcome && (
         <WelcomeScreen
           logoSrc={logo}
-          logoAlt="Photographer studio signature mark"
+          logoAlt="Photographer Office signature mark"
           slideshowImages={WELCOME_SLIDESHOW_IMAGES}
           onFinish={handleWelcomeFinish}
         />
@@ -57,7 +57,7 @@ const Index = () => {
         <PackageDetails />
         <About />
         <Testimonials />
-        <StudioMap />
+        <OfficeMap />
         <ContactForm />
         <Footer />
       </main>

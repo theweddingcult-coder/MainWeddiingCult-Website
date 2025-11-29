@@ -20,7 +20,7 @@ const Navigation = () => {
     { label: "Portfolio", id: "portfolio" },
     { label: "Packages", id: "packages" },
     { label: "About", id: "about" },
-    { label: "Visit Studio", id: "studio" },
+    { label: "Visit Office", id: "Office" },
     { label: "Contact", id: "contact" },
   ];
 

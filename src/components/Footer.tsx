@@ -31,13 +31,13 @@ const Footer = () => {
           <div>
             <h4 className="font-semibold mb-4 text-secondary">Quick Links</h4>
             <ul className="space-y-3">
-              {["portfolio", "packages", "about", "studio", "contact"].map((link) => (
+              {["portfolio", "packages", "about", "Office", "contact"].map((link) => (
                 <li key={link}>
                   <button
                     onClick={() => scrollToSection(link)}
                     className="text-primary-foreground/80 hover:text-secondary transition-colors text-sm capitalize"
                   >
-                    {link === "studio" ? "Visit Studio" : link}
+                    {link === "Office" ? "Visit Office" : link}
                   </button>
                 </li>
               ))}
@@ -62,7 +62,7 @@ const Footer = () => {
               </li>
               <li className="flex items-start gap-3 text-primary-foreground/80 text-sm">
                 <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0" />
-                <span>House no. 2015, Block B1, Sector 57, Gurugram, Haryana 122003</span>
+                <span>House no. 2015, Sector 57, Gurugram, Haryana 122003</span>
               </li>
             </ul>
           </div>
@@ -81,7 +81,7 @@ const Footer = () => {
                 <Instagram size={20} />
               </a>
               <a
-                href="https://www.youtube.com/@theweddiingcult9471"
+                href="https://youtube.com/@theweddiingcult?si=6TnkQGO0vlgUqpy1"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full border border-secondary flex items-center justify-center text-secondary hover:bg-secondary hover:text-primary transition-all duration-300"

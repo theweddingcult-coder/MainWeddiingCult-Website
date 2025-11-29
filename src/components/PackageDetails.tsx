@@ -70,7 +70,7 @@ const PackageDetails = () => {
                 <ul className="space-y-3 ml-9">
                   <li className="flex items-start gap-2">
                     <span className="text-secondary mt-1">•</span>
-                    <span>Local coverage within 50 km of our studio is included in all packages</span>
+                    <span>Local coverage within 50 km of our Office is included in all packages</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-secondary mt-1">•</span>

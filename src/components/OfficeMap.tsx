@@ -1,12 +1,12 @@
 import { MapPin, Clock } from "lucide-react";
 
-const StudioMap = () => {
+const OfficeMap = () => {
   return (
-    <section id="studio" className="py-20 md:py-32 bg-background">
+    <section id="Office" className="py-20 md:py-32 bg-background">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-4xl md:text-5xl font-heading font-bold text-primary mb-4">
-            Visit Our Studio
+            Visit Our Office
           </h2>
           <div className="w-24 h-1 bg-secondary mx-auto mb-8" />
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
@@ -42,7 +42,7 @@ const StudioMap = () => {
                   <div>
                     <p className="font-semibold text-foreground mb-1">Address</p>
                     <p className="text-muted-foreground">
-                      House no. 2015, Block B1, Sector 57, Gurugram, Haryana 122003
+                      House no. 2015, Sector 57, Gurugram, Haryana 122003
                     </p>
                   </div>
                 </div>
@@ -50,7 +50,7 @@ const StudioMap = () => {
                 <div className="flex items-start gap-4">
                   <Clock className="w-6 h-6 text-secondary flex-shrink-0 mt-1" />
                   <div>
-                    <p className="font-semibold text-foreground mb-1">Studio Hours</p>
+                    <p className="font-semibold text-foreground mb-1">Office Hours</p>
                     <p className="text-muted-foreground">10 am–8 pm daily</p>
                   </div>
                 </div>
@@ -77,4 +77,4 @@ const StudioMap = () => {
   );
 };
 
-export default StudioMap;
+export default OfficeMap;
