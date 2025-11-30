@@ -97,7 +97,7 @@ const ContactForm = () => {
         ...commonParams,
         to_email: formData.email,
         to_name: formData.name || "There",
-        reply_to: "theweddingcult@gmail.com",
+        reply_to: "theweddiingcult@gmail.com",
         brand_name: "the wedding cult",
         whatsapp: "+91 98110 98155",
         address: "House no. 2015, Block B1, Sector 57, Gurugram, Haryana 122003",
@@ -348,7 +348,7 @@ const ContactForm = () => {
               </p>
               <p>
                 Your data stays private: we do not sell or share your details with third parties. You may request deletion of your information at any time by
-                emailing <a href="mailto:theweddingcult@gmail.com" className="underline">theweddingcult@gmail.com</a>.
+                emailing <a href="mailto:theweddiingcult@gmail.com" className="underline">theweddiingcult@gmail.com</a>.
               </p>
               <p>
                 Please confirm that you understand and accept these conditions before we send your enquiry.

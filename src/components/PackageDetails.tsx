@@ -41,15 +41,15 @@ const PackageDetails = () => {
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-secondary mt-1">•</span>
-                    <span>Cinematic 4K video with professional color grading (Classic & Royal)</span>
+                    <span>Cinematic FHD video with professional color grading</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-secondary mt-1">•</span>
-                    <span>Premium albums with custom design layout (Classic & Royal)</span>
+                    <span>Premium albums with custom design layout</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-secondary mt-1">•</span>
-                    <span>Drone coverage where permitted by venue (Classic & Royal)</span>
+                    <span>Drone coverage where permitted by venue</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-secondary mt-1">•</span>
@@ -103,23 +103,23 @@ const PackageDetails = () => {
                 <ul className="space-y-3 ml-9">
                   <li className="flex items-start gap-2">
                     <span className="text-secondary mt-1">•</span>
-                    <span><strong>Booking:</strong> 30% advance to secure your date</span>
+                    <span><strong>Booking:</strong> 10% advance to secure your date</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-secondary mt-1">•</span>
-                    <span><strong>Pre-event:</strong> 50% due 15 days before the first event</span>
+                    <span><strong>Pre-event:</strong> 30% due 15 days before the first event</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-secondary mt-1">•</span>
-                    <span><strong>Final:</strong> 20% balance upon delivery of edited content</span>
+                    <span><strong>Post-event:</strong> 50% due after the event completion</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-secondary mt-1">•</span>
+                    <span><strong>Final:</strong> 10% balance upon delivery of edited content</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-secondary mt-1">•</span>
                     <span>Accepted methods: Bank transfer, UPI, credit card, or cheque</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-secondary mt-1">•</span>
-                    <span>Invoices provided for all transactions with GST details</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-secondary mt-1">•</span>
@@ -148,7 +148,7 @@ const PackageDetails = () => {
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-secondary mt-1">•</span>
-                    <span><strong>Preview:</strong> 15-20 teaser photos shared within 48 hours (for social sharing)</span>
+                    <span><strong>Preview:</strong> All photos shared in 7 days (for social sharing)</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-secondary mt-1">•</span>
@@ -156,15 +156,7 @@ const PackageDetails = () => {
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-secondary mt-1">•</span>
-                    <span><strong>Films:</strong> Highlight film 2-3 days after photos; documentary film as per timeline</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-secondary mt-1">•</span>
-                    <span><strong>Albums:</strong> Design proof sent within 7 days of content delivery; printed album ships 10-14 days after approval</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-secondary mt-1">•</span>
-                    <span>All content archived for 2 years; re-download available anytime</span>
+                    <span><strong>Films:</strong> Documentary film as per timeline</span>
                   </li>
                 </ul>
               </AccordionContent>
@@ -184,7 +176,7 @@ const PackageDetails = () => {
                     <ul className="space-y-2">
                       <li className="flex justify-between">
                         <span>Additional photographer (per day)</span>
-                        <span className="text-secondary font-medium">₹8,000</span>
+                        <span className="text-secondary font-medium">₹15,000</span>
                       </li>
                       <li className="flex justify-between">
                         <span>Extra coverage hours</span>
@@ -201,11 +193,11 @@ const PackageDetails = () => {
                     <ul className="space-y-2">
                       <li className="flex justify-between">
                         <span>Additional videographer (per day)</span>
-                        <span className="text-secondary font-medium">₹12,000</span>
+                        <span className="text-secondary font-medium">₹20,000</span>
                       </li>
                       <li className="flex justify-between">
                         <span>Same-day edit (ready by reception)</span>
-                        <span className="text-secondary font-medium">₹18,000</span>
+                        <span className="text-secondary font-medium">₹20,000</span>
                       </li>
                       <li className="flex justify-between">
                         <span>Drone coverage upgrade</span>
@@ -218,15 +210,11 @@ const PackageDetails = () => {
                     <ul className="space-y-2">
                       <li className="flex justify-between">
                         <span>Additional premium album (12x18)</span>
-                        <span className="text-secondary font-medium">₹12,000</span>
+                        <span className="text-secondary font-medium">₹22,000</span>
                       </li>
                       <li className="flex justify-between">
                         <span>Parent album (10x12, 20 sheets)</span>
                         <span className="text-secondary font-medium">₹7,500</span>
-                      </li>
-                      <li className="flex justify-between">
-                        <span>Photo prints (set of 50)</span>
-                        <span className="text-secondary font-medium">₹4,000</span>
                       </li>
                     </ul>
                   </div>

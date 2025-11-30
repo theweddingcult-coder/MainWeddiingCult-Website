@@ -34,7 +34,7 @@ const About = () => {
           {/* Content */}
           <div>
             <h2 className="text-4xl md:text-5xl font-heading font-bold text-primary mb-6">
-              Meet Gulshaan Kumar
+              Meet Gulshan Kumar
             </h2>
             <div className="w-24 h-1 bg-secondary mb-8" />
             

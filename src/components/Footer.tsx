@@ -57,7 +57,7 @@ const Footer = () => {
               <li className="flex items-start gap-3 text-primary-foreground/80 text-sm">
                 <Mail className="w-4 h-4 mt-0.5 flex-shrink-0" />
                 <a href="mailto:theweddiingcult@gmail.com" className="hover:text-secondary transition-colors">
-                  theweddingcult@gmail.com
+                  theweddiingcult@gmail.com
                 </a>
               </li>
               <li className="flex items-start gap-3 text-primary-foreground/80 text-sm">
@@ -118,7 +118,7 @@ const Footer = () => {
       <div className="border-t border-secondary/20">
         <div className="container mx-auto px-4 py-6">
           <p className="text-center text-primary-foreground/60 text-sm">
-            © {currentYear} the weddiing cult. Made with love By JPConsultancy.
+            © {currentYear} the weddiing cult (An extension of Studio Photo Vision). Made with love By JPConsultancy.
           </p>
         </div>
       </div>

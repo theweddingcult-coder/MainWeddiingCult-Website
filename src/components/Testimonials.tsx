@@ -3,20 +3,20 @@ import { Star } from "lucide-react";
 
 const testimonials = [
   {
-    name: "Priya & Rahul",
-    event: "Hindu weddiing, Jaipur",
-    text: "Absolutely blown away by the quality of work! They captured every emotion, every tear, every smile so beautifully. Our families still can't stop watching the highlight film.",
+    name: "Hanisha Taneja",
+    event: "wedding, Jaipur",
+    text: "I'm so glad I went with them! The pictures are so well done. They're just beautiful. I'm happy with the shots they got, the way I look, and the way everyone else looks. These are some great keepsakes from our special day. Thanks for making our day memorable. I definitely recommend going with The Wedding Cult!",
     rating: 5,
   },
   {
-    name: "Ananya Sharma",
-    event: "Pre-weddiing Shoot, Goa",
-    text: "We were nervous about being in front of the camera, but they made us feel so comfortable. The photos came out like a dream – cinematic, natural, and so 'us'. Highly recommend!",
+    name: "Reema garg",
+    event: "Pre-wedding Shoot, Goa",
+    text: "Have got wonderful photoshoot. Value for money and good team. Everyone loved the pictures. Thanks for gracing our event with beautiful clicks. Highly recommended.",
     rating: 5,
   },
   {
     name: "Vikram & Meera",
-    event: "Multi-day weddiing, Udaipur",
+    event: "Multi-day wedding, Udaipur",
     text: "From mehndi to pheras, they were there capturing moments we didn't even realize happened. The documentary film is now a family heirloom. Professional, punctual, and incredibly talented.",
     rating: 5,
   },
