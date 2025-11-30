@@ -38,6 +38,7 @@ const ContactForm = () => {
     city: "",
     services: [] as string[],
     budget: "",
+    packageSelected: "",
     message: "",
     consent: false,
   });
@@ -86,6 +87,7 @@ const ContactForm = () => {
         event_type: formData.eventType,
         event_date: formData.eventDate,
         city: formData.city,
+        package_selected: formData.packageSelected,
         services: formData.services.join(", "),
         budget: formData.budget,
         message: formData.message,
@@ -134,6 +136,7 @@ const ContactForm = () => {
         city: "",
         services: [],
         budget: "",
+        packageSelected: "",
         message: "",
         consent: false,
       });
@@ -260,7 +263,7 @@ const ContactForm = () => {
             <div>
               <Label>Services Needed</Label>
               <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-3">
-                {["Photography", "Videography", "Drone", "Albums", "Same-Day Edit"].map((service) => (
+                {["Photography", "Videography", "Drone Coverage", "Albums", "Same-Day Edit", "Pre-wedding Shoot"].map((service) => (
                   <div key={service} className="flex items-center gap-2">
                     <Checkbox
                       id={service}
@@ -276,17 +279,33 @@ const ContactForm = () => {
             </div>
 
             <div>
+              <Label htmlFor="packageSelected">Interested Package (Optional)</Label>
+              <Select value={formData.packageSelected} onValueChange={(value) => setFormData({ ...formData, packageSelected: value })}>
+                <SelectTrigger className="mt-2">
+                  <SelectValue placeholder="Select a package" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="basic">Basic - Wedding Package - ₹25,000</SelectItem>
+                  <SelectItem value="standard">Standard - Wedding Package - ₹45,000</SelectItem>
+                  <SelectItem value="essential">Essential - Wedding Package - ₹75,000 (Most Popular)</SelectItem>
+                  <SelectItem value="premium">Premium - 3-Day Coverage - ₹3,56,000</SelectItem>
+                  <SelectItem value="not-sure">Not sure yet</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div>
               <Label htmlFor="budget">Estimated Budget</Label>
               <Select value={formData.budget} onValueChange={(value) => setFormData({ ...formData, budget: value })}>
                 <SelectTrigger className="mt-2">
                   <SelectValue placeholder="Select budget range" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="under-50k">Under ₹50,000</SelectItem>
-                  <SelectItem value="50k-1l">₹50,000 - ₹1,00,000</SelectItem>
-                  <SelectItem value="1l-2l">₹1,00,000 - ₹2,00,000</SelectItem>
-                  <SelectItem value="2l-3l">₹2,00,000 - ₹3,00,000</SelectItem>
-                  <SelectItem value="above-3l">Above ₹3,00,000</SelectItem>
+                  <SelectItem value="basic">Basic - ₹25,000</SelectItem>
+                  <SelectItem value="standard">Standard - ₹45,000</SelectItem>
+                  <SelectItem value="essential">Essential - ₹75,000</SelectItem>
+                  <SelectItem value="premium">Premium - ₹3,56,000</SelectItem>
+                  <SelectItem value="custom">Custom Quote</SelectItem>
                 </SelectContent>
               </Select>
             </div>
