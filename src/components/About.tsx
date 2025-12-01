@@ -51,7 +51,7 @@ const About = () => {
               <div className="flex items-start gap-3">
                 <Camera className="w-6 h-6 text-secondary flex-shrink-0 mt-1" />
                 <div>
-                  <p className="font-semibold text-foreground">200+ weddings</p>
+                  <p className="font-semibold text-foreground">1000+ weddings</p>
                   <p className="text-sm text-muted-foreground">Shot across India</p>
                 </div>
               </div>
