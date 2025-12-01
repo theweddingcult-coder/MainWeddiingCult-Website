@@ -34,6 +34,7 @@ const DRIVE_COLLECTIONS: Array<{ category: FilterType; urls: string[] }> = [
   {
     category: "Haldi",
     urls: [
+      "https://drive.google.com/file/d/1ZqY0bz6IBqduw65HB1_mS4tyCuRv1E5v/view?usp=sharing",
       "https://drive.google.com/file/d/1c8_46kX8HzZkdmx-NydIcDyTHBLLsQUD/view?usp=sharing",
       "https://drive.google.com/file/d/1fcBCxJKzWpzPFoSszJfG_BgjiDvvKge3/view?usp=sharing",
       "https://drive.google.com/file/d/1Q5sr7-bvpKh-ygxffTb4k-xFJafIm1mT/view?usp=sharing",
